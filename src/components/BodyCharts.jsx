@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import PieChartConfig from './Charts/PieChartConfig'
-import ChartsConfig from './Charts/Config/chartsConfig'
+import ChartsConfig from './Charts/Config/ChartsConfig'
 
 function BodyCharts() {
 function ChangeOrder(index) {
