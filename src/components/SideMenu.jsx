@@ -15,26 +15,26 @@ function SideMenu() {
       <h4 className="mb-4 fw-bold text-primary">Menu</h4>
 
       <div className="mb-3">
-            <label className="form-label fw-semibold">seila</label>
+            <label className="form-label fw-semibold">\Temas</label>
             <select className="form-select">
               <option>Selecione</option>
-              <option>blacnck</option>
-              <option>blacnck</option>
-              <option>blacnck</option>
-              <option>blacnck</option>
-              <option>blacnck</option>
+              <option>Selecione</option>
+              <option>Selecione</option>
+              <option>Selecione</option>
+              <option>Selecione</option>
+              <option>Selecione</option>
             </select>
           </div>
 
           <div className="mb-3">
-            <label className="form-label fw-semibold">Relaçoes</label>
+            <label className="form-label fw-semibold">Relações</label>
             <select className="form-select">
               <option>Selecione</option>
-              <option>blacnck</option>
-              <option>blacnck</option>
-              <option>blacnck</option>
-              <option>blacnck</option>
-              <option>blacnck</option>
+              <option>Selecione</option>
+              <option>Selecione</option>
+              <option>Selecione</option>
+              <option>Selecione</option>
+              <option>Selecione</option>
             </select>
           </div>
 
@@ -69,9 +69,9 @@ function SideMenu() {
               <option>Selecione</option>
               <option>Engenharia</option>
               <option>Direito</option>
-              <option>Medicina</option>
+              <option>Biomedicina</option>
               <option>Administração</option>
-              <option>TI</option>
+              <option>Jornalismo</option>
             </select>
           </div>
 
