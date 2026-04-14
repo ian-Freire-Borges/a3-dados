@@ -15,7 +15,7 @@ const ChartsConfig = [
     categories: ["geral"]
   },
   {
-    title: "Situação Profissional dos Estudantes",
+    title: "Estudantes trabalham atualmente?",
     question: "Você trabalha/faz estágio?",
     categories: ["geral"]
   }
