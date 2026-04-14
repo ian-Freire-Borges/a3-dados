@@ -15,7 +15,7 @@ function SideMenu() {
       <h4 className="mb-4 fw-bold text-primary">Menu</h4>
 
       <div className="mb-3">
-            <label className="form-label fw-semibold">\Temas</label>
+            <label className="form-label fw-semibold">Temas</label>
             <select className="form-select">
               <option>Selecione</option>
               <option>Selecione</option>
