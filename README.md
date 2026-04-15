@@ -31,4 +31,3 @@ O objetivo é facilitar a visualização e análise de dados acadêmicos de form
 - Bootstrap / CSS  
 
 
-git clone https://github.com/seu-usuario/seu-repositorio.git
