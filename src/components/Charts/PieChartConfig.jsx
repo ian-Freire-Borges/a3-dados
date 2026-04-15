@@ -10,11 +10,27 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-function PieChartConfig({question,title, titleSize }) {
+function PieChartConfig({question,title, titleSize,type}) {
   const [activeIndex, setActiveIndex] = useState(null)
   const [data, setData] = useState([])
+  const donut = type === "donnut" ? 30 : undefined
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AA66CC']
+  const COLORS = [
+  '#2563EB', // azul
+  '#DC2626', // vermelho
+  '#16A34A', // verde
+  '#F59E0B', // amarelo
+  '#7C3AED', // roxo
+  '#0D9488', // teal
+  '#EA580C', // laranja
+  '#4B5563', // cinza escuro
+  '#DB2777', // rosa
+  '#65A30D', // verde oliva
+  '#0891B2', // azul petróleo
+  '#BE123C', // vinho
+  '#9333EA', // violeta
+  '#CA8A04'  // dourado
+]
 
   useEffect(() => {
   sheetsData.get('/1')
@@ -46,6 +62,8 @@ function PieChartConfig({question,title, titleSize }) {
     const x = cx + radius * Math.cos(-midAngle * RADIAN)
     const y = cy + radius * Math.sin(-midAngle * RADIAN)
 
+    const totalOpcoes = data.length
+
     return (
       <text
         x={x}
@@ -54,7 +72,7 @@ function PieChartConfig({question,title, titleSize }) {
         textAnchor="middle"
         dominantBaseline="central"
         style={{
-          fontSize: 12,
+          fontSize: Math.max(5, titleSize / Math.sqrt(totalOpcoes)),
           fontWeight: 700,
           pointerEvents: 'none'
         }}
@@ -88,6 +106,7 @@ function PieChartConfig({question,title, titleSize }) {
     }
     return null
   }
+
 return (
   <div style={{
     width: '100%',
@@ -118,6 +137,7 @@ return (
             dataKey="value"
             nameKey="name"
             outerRadius="80%"
+            innerRadius={donut}
             activeIndex={activeIndex}
             animationDuration={400}
             isAnimationActive={true}
@@ -151,6 +171,7 @@ return (
             layout="vertical"
             align="right"
             verticalAlign="middle"
+             wrapperStyle={{ fontSize: titleSize - 8 }}
           />
 
         </PieChart>
