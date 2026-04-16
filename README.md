@@ -29,5 +29,3 @@ O objetivo é facilitar a visualização e análise de dados acadêmicos de form
 - Axios (requisições HTTP)  
 - Google Sheets API  
 - Bootstrap / CSS  
-
-
