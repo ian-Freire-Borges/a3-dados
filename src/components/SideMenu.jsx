@@ -25,7 +25,7 @@ function SideMenu({
           className="form-select"
           onChange={(e) => setFiltroTemas(e.target.value)}
         >
-          <option value="geral">Geral</option>
+          <option value="geral">Perfil Estudantil</option>
           <option value="desempenho">Desempenho</option>
           <option value="habitos">Hábitos de Estudo</option>
           <option value="perfil">Perfil dos Estudantes</option>
@@ -36,7 +36,8 @@ function SideMenu({
 
       <div className="mb-3">
         <label className="form-label fw-semibold ">Tema de Cores</label>
-        <select className="form-select ">
+        <select className="form-select "
+        onChange={(e) =>   setModoCores(e.target.value)}>
           <option value="default">Padrão</option>
           <option value="pastel">Pastel</option>
           <option value="vibrant">Vibrante</option>

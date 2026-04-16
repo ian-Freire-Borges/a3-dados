@@ -11,9 +11,16 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-function BestCompareChart({ question, questionB, title, titleSize }) {
+function BarChartConfig({
+  question,
+  questionB,
+  title,
+  fontSizeDeteminer,
+  mainChart,
+}) {
   const [data, setData] = useState([]);
-  const [keys, setKeys] = useState([])
+  const [keys, setKeys] = useState([]);
+  const totalOpcoes = data.length;
 
   const COLORS = [
     "#4F46E5",
@@ -25,32 +32,30 @@ function BestCompareChart({ question, questionB, title, titleSize }) {
     "#EC4899",
   ];
 
-useEffect(() => {
-  sheetsData.get('/1').then(res => {
+  useEffect(() => {
+    sheetsData.get("/1").then((res) => {
+      const grouped = {};
+      const dynamicKeys = new Set();
 
-    const grouped = {}
-    const dynamicKeys = new Set()
+      res.data.forEach((item) => {
+        const x = String(item[question] || "").trim();
+        const y = String(item[questionB] || "").trim();
 
-    res.data.forEach(item => {
-      const x = String(item[question] || '').trim()
-      const y = String(item[questionB] || '').trim()
+        if (!x || !y) return;
 
-      if (!x || !y) return
+        if (!grouped[x]) {
+          grouped[x] = { name: x };
+        }
 
-      if (!grouped[x]) {
-        grouped[x] = { name: x }
-      }
+        grouped[x][y] = (grouped[x][y] || 0) + 1;
 
-      grouped[x][y] = (grouped[x][y] || 0) + 1
+        dynamicKeys.add(y);
+      });
 
-      dynamicKeys.add(y)
-    })
-
-    setData(Object.values(grouped))
-    setKeys([...dynamicKeys])
-
-  })
-}, [question, questionB])
+      setData(Object.values(grouped));
+      setKeys([...dynamicKeys]);
+    });
+  }, [question, questionB]);
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -59,7 +64,7 @@ useEffect(() => {
       return (
         <div
           style={{
-           fontSize: "12px",
+            fontSize: "12px",
             background: "#fff",
             padding: "2px",
             border: "1px solid #ddd",
@@ -83,7 +88,6 @@ useEffect(() => {
     }
     return null;
   };
-
   return (
     <div
       style={{
@@ -98,7 +102,7 @@ useEffect(() => {
         style={{
           textAlign: "center",
           color: "black",
-          fontSize: titleSize,
+          fontSize: fontSizeDeteminer,
         }}
       >
         {title}
@@ -110,29 +114,60 @@ useEffect(() => {
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
 
-            <XAxis label={{ 
-    value: "Total de pessoas", 
-    angle: -90, 
-    position: "insideLeft" ,
-    offset: -40,
-    style: {
-      fontSize: 11,
-      fill: "#374151",   // cinza escuro (melhor que preto puro)
-      fontWeight: 500    // mantém legibilidade
-    }
-  }} dataKey="name" />
-            <YAxis />
+            <XAxis
+              dataKey="name"
+              label={
+                mainChart
+                  ? {
+                      value: "Horas de estudo",
+                      position: "insideLeft",
+                      offset: -60,
+                      dy: 12,
+                      style: {
+                        fontSize: fontSizeDeteminer - 13,
+                        fill: "#374151",
+                        fontWeight: 500,
+                      },
+                    }
+                  : undefined
+              }
+            />
+            <YAxis
+              label={
+                mainChart
+                  ? {
+                      value: "Total de pessoas",
+                      angle: -90,
+                      offset: 70,
+                      dx: -20,
+                      position: "insideBottom",
+                      style: {
+                        fontSize: fontSizeDeteminer - 13,
+                        fill: "#374151",
+                        fontWeight: 500,
+                      },
+                    }
+                  : undefined
+              }
+            />
+            {mainChart && <Tooltip content={<CustomTooltip />} />}
 
-            <Tooltip content={<CustomTooltip />} />
-
-            <Legend />
-{keys.map((key, index) => (
-  <Bar
-    key={key}
-    dataKey={key}
-    fill={COLORS[index % COLORS.length]}
-  />
-))}
+            <Legend
+              wrapperStyle={{
+                fontSize: Math.max(
+                  8,
+                  fontSizeDeteminer / Math.sqrt(totalOpcoes),
+                ),
+              }}
+              formatter={(value) => `${value} anos`}
+            />
+            {keys.map((key, index) => (
+              <Bar
+                key={key}
+                dataKey={key}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -140,4 +175,4 @@ useEffect(() => {
   );
 }
 
-export default BestCompareChart;
+export default BarChartConfig;
