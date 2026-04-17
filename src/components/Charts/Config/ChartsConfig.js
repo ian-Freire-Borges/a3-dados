@@ -44,6 +44,15 @@ const ChartsConfig = [
     type:"bar",
     typs:"",
     eixoX:"Horas de estudo"
+  },
+  {
+    title: "Horas de estudo × Estresse",
+    question: "Com que frequência você se sente estressado/ansioso?",
+    questionB:"Quantas horas por dia você dedica aos estudos (fora das aulas)?  ",
+    categories: "desempenho",
+    type:"line",
+    typs:"",
+    eixoX:"Nivel de Estresse"
   }
 ];
 

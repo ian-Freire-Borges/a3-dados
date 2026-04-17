@@ -2,7 +2,9 @@ import React from "react";
 import { useState ,useEffect} from "react";
 import PieChartConfig from "./Charts/PieChartConfig";
 import ChartsConfig from "./Charts/Config/ChartsConfig";
+import LineCharts from "./Charts/LineChart";
 import BarChartConfig from "./Charts/BarChart";
+
 
 
 function BodyCharts({ filtroIdade, filtroCurso, modoCores, filtroTemas }) {
@@ -22,7 +24,8 @@ useEffect(() => {
   const chartMap = {
   pie: PieChartConfig,
   donnut: PieChartConfig,
-  bar: BarChartConfig
+  bar: BarChartConfig,
+  line: LineCharts
 };
 
 function RenderChart(chart, fontSizeDeteminer,index) {
