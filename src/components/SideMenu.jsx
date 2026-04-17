@@ -9,6 +9,7 @@ function SideMenu({
   const [open, setOpen] = useState(false);
 
   return (
+    
     <div
       className="d-flex flex-column p-4 border-end shadow-sm"
       style={{

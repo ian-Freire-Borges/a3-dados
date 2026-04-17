@@ -3,40 +3,48 @@ const ChartsConfig = [
     title: "Distribuição de Idades",
     question: "Qual a sua idade?",
     categories: "geral",
-    type:"donnut"
+    type:"donnut",
+    typs:"Idade :"
   },
   { 
     title: "Distribuição de Semestres",
     question: "Qual é o seu semestre atual?  ",
     categories: "geral",
-    type:"donnut"
+    type:"donnut",
+    typs:"Semestre :"
   },
   {
     title: "Distribuição de Cursos",
     question: "Qual o seu curso?",
     categories: "geral",
-    type:"pie"
+    type:"pie",
+    typs:""
   },
   {
     title: "Estudantes trabalham atualmente?",
     question: "Você trabalha/faz estágio?",
     categories: "geral",
-    type:"pie"
+    type:"pie",
+    typs:""
   },
     {
     title: "Distribuição de Idade por Semestre",
     question: "Qual é o seu semestre atual?  ",
     questionB:"Qual a sua idade?",
     categories: "geral",
-    type:"bar"
+    type:"bar",
+    typs:"Anos",
+    eixoX:"Semestre"
   },
   {
     title: "Horas de estudo × desempenho acadêmico",
     question: "Quantas horas por dia você dedica aos estudos (fora das aulas)?  ",
     questionB:"Como você avalia seu desempenho acadêmico?",
     categories: "desempenho",
-    type:"bar"
+    type:"bar",
+    typs:"",
+    eixoX:"Horas de estudo"
   }
-]
+];
 
 export default ChartsConfig

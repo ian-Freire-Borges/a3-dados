@@ -16,6 +16,8 @@ function BarChartConfig({
   questionB,
   title,
   fontSizeDeteminer,
+  typs,
+  eixoX,
   mainChart,
 }) {
   const [data, setData] = useState([]);
@@ -73,14 +75,14 @@ function BarChartConfig({
           }}
         >
           <p style={{ margin: 0, fontWeight: "bold", color: "#000" }}>
-            {payload[0].payload.name}
+            {`${eixoX}: ${payload[0].payload.name}`}
           </p>
 
-          <p style={{ margin: 0, color: "#000" }}>Total: {total}</p>
+          <p style={{ margin: 0, color: "#000" }}>Total de pessoas: {total}</p>
 
           {payload.map((p, i) => (
             <p key={i} style={{ margin: 0, color: "#000" }}>
-              {p.dataKey}: {p.value}
+              {p.dataKey} /Total: {p.value}
             </p>
           ))}
         </div>
@@ -119,7 +121,7 @@ function BarChartConfig({
               label={
                 mainChart
                   ? {
-                      value: "Horas de estudo",
+                      value:eixoX,
                       position: "insideLeft",
                       offset: -60,
                       dy: 12,
@@ -153,13 +155,17 @@ function BarChartConfig({
             {mainChart && <Tooltip content={<CustomTooltip />} />}
 
             <Legend
+            iconSize={Math.max(
+                  8,
+                  fontSizeDeteminer / Math.sqrt(totalOpcoes),
+                )}
               wrapperStyle={{
                 fontSize: Math.max(
                   8,
                   fontSizeDeteminer / Math.sqrt(totalOpcoes),
                 ),
               }}
-              formatter={(value) => `${value} anos`}
+              formatter={(value) => `${value} ${typs}`}
             />
             {keys.map((key, index) => (
               <Bar

@@ -10,11 +10,11 @@ import {
   ResponsiveContainer
 } from 'recharts'
 
-function PieChartConfig({ question, title, fontSizeDeteminer, type,mainChart}) {
+function PieChartConfig({ question, title, fontSizeDeteminer, type,typs,mainChart}) {
   const [activeIndex, setActiveIndex] = useState(null)
   const [data, setData] = useState([])
 
-  const donut = type === "donnut" ? 30 : undefined
+  const donut = type === "donnut" ? 20 : undefined
 
   const [page, setPage] = useState(0)
   const ITEMS_PER_PAGE = 6
@@ -91,8 +91,8 @@ function PieChartConfig({ question, title, fontSizeDeteminer, type,mainChart}) {
           borderRadius: '8px',
           color:'black'
         }}>
-          <p style={{ margin: 0 }}><strong>{payload[0].name}</strong></p>
-          <p style={{ margin: 0 }}>Total: {value}</p>
+          <p style={{ margin: 0 }}><strong>{`${typs} ${payload[0].name}`}</strong></p>
+          <p style={{ margin: 0 }}>Total de pessoas: {value}</p>
           <p style={{ margin: 0 }}>{percent}%</p>
         </div>
       )

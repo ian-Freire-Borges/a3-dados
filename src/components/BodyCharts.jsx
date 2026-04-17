@@ -4,6 +4,7 @@ import PieChartConfig from "./Charts/PieChartConfig";
 import ChartsConfig from "./Charts/Config/ChartsConfig";
 import BarChartConfig from "./Charts/BarChart";
 
+
 function BodyCharts({ filtroIdade, filtroCurso, modoCores, filtroTemas }) {
 const [ChartsConfigR, setChartsConfigR] = useState(ChartsConfig);
 useEffect(() => {
@@ -36,6 +37,8 @@ function RenderChart(chart, fontSizeDeteminer,index) {
   title={chart.title}
   fontSizeDeteminer={fontSizeDeteminer}
   type={chart.type}
+  typs={chart.typs}
+  eixoX={chart.eixoX}
   mainChart={index === 0}
 />
   );
