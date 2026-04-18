@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo,useEffect } from 'react'
 import { useSheetData } from '../hooks/useSheetData'
 import PieChartConfig from './Charts/PieChartConfig'
 import BarChartConfig from './Charts/BarChart'
@@ -56,7 +56,7 @@ function BodyCharts() {
   const [page, setPage] = useState(0)
 const pageSize = 5
 
-  const displayCharts = useMemo(() => {
+const displayCharts = useMemo(() => {
   const base =
     order.length === filtered.length &&
     order.every(id => filtered.some(c => c.id === id))
@@ -64,18 +64,30 @@ const pageSize = 5
       : filtered
 
   const start = page * pageSize
-  const end = start + pageSize
-
-  return base.slice(start, end)
+  return base.slice(start, start + pageSize)
 }, [filtered, order, page])
 
   function bringToFront(index) {
-    const ids = displayCharts.map(c => c.id)
-    const temp = ids[0]
-    ids[0] = ids[index]
-    ids[index] = temp
-    setOrder([...ids])
+  const globalIndex = page * pageSize + index
+
+  const newOrder = [...order]
+
+  const [item] = newOrder.splice(globalIndex, 1)
+  newOrder.unshift(item)
+
+  setOrder(newOrder)
+}
+
+  useEffect(() => {
+  if (filtered.length > 0) {
+    setOrder(filtered.map(c => c.id))
   }
+}, [filtered])
+useEffect(() => {
+  setPage(0)
+
+
+},[tema])
 
   return (
     <div className="container-fluid py-3 px-3" style={{ flex: 1, overflowY: 'auto' }}>
