@@ -65,25 +65,28 @@ export function DataProvider({ children }) {
   const [filtros, setFiltros] = useState({ idade: '', curso: '', trabalho: '', semestre: '' })
   const [tema,    setTema]    = useState('geral')
   const [cores,   setCores]   = useState('default')
+useEffect(() => {
+  const load = async () => {
+    try {
+      setLoading(true)
 
-  useEffect(() => {
-    setLoading(true)
-    sheetsData.get('/Sheet1')          // tenta Sheet1 primeiro
-      .catch(() => sheetsData.get('/1'))// fallback para /1
-      .then(res => {
-        const rows = res.data
-        if (rows?.length) {
-          setKeyMap(buildKeyMap(rows[0]))
-        }
-        setRawData(rows ?? [])
-        setLoading(false)
-      })
-      .catch(err => {
-        setError(err)
-        setLoading(false)
-      })
-  }, [])
+      const rows = await sheetsData() // 👈 agora correto
 
+      if (rows?.length) {
+        setKeyMap(buildKeyMap(rows[0]))
+      }
+
+      setRawData(rows ?? [])
+
+    } catch (err) {
+      setError(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  load()
+}, [])
   // ── Filtros dinâmicos (usa keyMap) ──────────────────────────────────────
   const data = useMemo(() => {
     const kIdade    = keyMap.IDADE

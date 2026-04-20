@@ -33,6 +33,7 @@ function RenderChart(chart, titleSize, isMain = false) {
       groupBy={chart.groupBy}
       axes={chart.axes}
       eixoX={chart.eixoX}
+      eixoY={chart.eixoY}
       suffix={chart.suffix}
       isMain={isMain}
       order={chart.order}
@@ -46,12 +47,15 @@ function RenderChart(chart, titleSize, isMain = false) {
 
 function BodyCharts() {
   const { tema } = useSheetData()
+  
+ 
 
   const filtered = useMemo(() => {
     const cat = tema || 'geral'
     return ChartsConfig.filter(c => c.categories.includes(cat))
   }, [tema])
 
+  const [isMobile, setIsMobile] = useState(false)
   const [order, setOrder] = useState([])
   const [page, setPage] = useState(0)
 const pageSize = 5
@@ -65,7 +69,7 @@ const displayCharts = useMemo(() => {
 
   const start = page * pageSize
   return base.slice(start, start + pageSize)
-}, [filtered, order, page])
+}, [filtered, order, page,])
 
   function bringToFront(index) {
   const globalIndex = page * pageSize + index
@@ -82,12 +86,27 @@ const displayCharts = useMemo(() => {
   if (filtered.length > 0) {
     setOrder(filtered.map(c => c.id))
   }
+
 }, [filtered])
 useEffect(() => {
   setPage(0)
 
 
 },[tema])
+ useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth <= 968)
+  }
+
+  handleResize() // seta valor inicial
+
+  window.addEventListener("resize", handleResize)
+
+  return () => {
+    window.removeEventListener("resize", handleResize)
+  }
+}, [])
+
 
   return (
     <div className="container-fluid py-3 px-3" style={{ flex: 1, overflowY: 'auto' }}>
@@ -103,7 +122,7 @@ useEffect(() => {
         <div className="row g-3 align-items-stretch">
           <div className="col-12 col-lg-8">
             <div className="rounded shadow p-3 chart-box big" style={{ background: '#fff' }}>
-              {RenderChart(displayCharts[0], 22, true)}
+              {RenderChart(displayCharts[0], 22, !isMobile)}
             </div>
           </div>
 
